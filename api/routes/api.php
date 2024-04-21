@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-// 追加
-Route::get('/test', function () {
-    return response()->json([
-        'message' => 'API test.',
-    ]);
+
+// Auth不要
+Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+    Route::get('/login', [AuthController::class], 'login');
 });
