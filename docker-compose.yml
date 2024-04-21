@@ -38,3 +38,19 @@ services:
       - 9000
     tty: true
     restart: always
+
+  mysql:
+    image: mysql:5.7
+    platform: linux/x86_64
+    container_name: mysql_db
+    environment:
+      - "MYSQL_DATABASE=laravel"
+      - "MYSQL_USER=db_user"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+volumes:
+  mysql_data:
